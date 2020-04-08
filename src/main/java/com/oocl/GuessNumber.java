@@ -56,7 +56,7 @@ public class GuessNumber {
         return resultList;
     }
 
-    public String play(ArrayList<Integer> userNumbers) {
+    public String feedback(ArrayList<Integer> userNumbers) {
         return correctNumberAndPosition(userNumbers) + "A" + correctNumberButWrongPosition(userNumbers) + "B";
     }
 

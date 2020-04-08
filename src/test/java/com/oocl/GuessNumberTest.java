@@ -50,6 +50,11 @@ public class GuessNumberTest {
 
     @Test
     public void should_game_feedback() {
-//        assertEquals(game.play());
+        assertEquals("1A0B",game.feedback(game.parseUserInput("1 5 6 7")));
+        assertEquals("0A2B",game.feedback(game.parseUserInput("2 4 7 8")));
+        assertEquals("1A2B",game.feedback(game.parseUserInput("0 3 2 4")));
+        assertEquals("0A0B",game.feedback(game.parseUserInput("5 6 7 8")));
+        assertEquals("0A4B",game.feedback(game.parseUserInput("4 3 2 1")));
+        assertEquals("4A0B",game.feedback(game.parseUserInput("1 2 3 4")));
     }
 }
