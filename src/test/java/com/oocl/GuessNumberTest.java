@@ -38,6 +38,14 @@ public class GuessNumberTest {
         assertEquals("0",game.correctNumberAndPosition(game.parseUserInput("5 6 7 8")));
         assertEquals("0",game.correctNumberAndPosition(game.parseUserInput("4 3 2 1")));
         assertEquals("4",game.correctNumberAndPosition(game.parseUserInput("1 2 3 4")));
+    }@Test
+    public void should_correct_number_but_wrong_position() {
+        assertEquals("0",game.correctNumberButWrongPosition(game.parseUserInput("1 5 6 7")));
+        assertEquals("2",game.correctNumberButWrongPosition(game.parseUserInput("2 4 7 8")));
+        assertEquals("2",game.correctNumberButWrongPosition(game.parseUserInput("0 3 2 4")));
+        assertEquals("0",game.correctNumberButWrongPosition(game.parseUserInput("5 6 7 8")));
+        assertEquals("4",game.correctNumberButWrongPosition(game.parseUserInput("4 3 2 1")));
+        assertEquals("0",game.correctNumberButWrongPosition(game.parseUserInput("1 2 3 4")));
     }
 
     @Test
