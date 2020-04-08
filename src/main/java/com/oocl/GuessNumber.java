@@ -47,6 +47,16 @@ public class GuessNumber {
         }
         return true;
     }
+    public ArrayList<Integer> parseUserInput(String userInputLine){
+        ArrayList<Integer> resultList = new ArrayList<>();
+        new ArrayList<String>(Arrays.asList(userInputLine.split(" ")))
+                .stream().forEach(element -> resultList.add(Integer.parseInt(element)));
+        return resultList;
+    }
+    public String play(){
+
+        return "";
+    }
 
     public static void main(String argv[]) {
         GuessNumber game = new GuessNumber();
