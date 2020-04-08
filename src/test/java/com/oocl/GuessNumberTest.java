@@ -31,6 +31,16 @@ public class GuessNumberTest {
     }
 
     @Test
+    public void should_correct_number_and_position() {
+        assertEquals("1",game.correctNumberAndPosition(game.parseUserInput("1 5 6 7")));
+        assertEquals("0",game.correctNumberAndPosition(game.parseUserInput("2 4 7 8")));
+        assertEquals("1",game.correctNumberAndPosition(game.parseUserInput("0 3 2 4")));
+        assertEquals("0",game.correctNumberAndPosition(game.parseUserInput("5 6 7 8")));
+        assertEquals("0",game.correctNumberAndPosition(game.parseUserInput("4 3 2 1")));
+        assertEquals("4",game.correctNumberAndPosition(game.parseUserInput("1 2 3 4")));
+    }
+
+    @Test
     public void should_game_feedback() {
 //        assertEquals(game.play());
     }
