@@ -4,6 +4,7 @@ import java.util.*;
 
 public class GuessNumber {
     private static final int ANSWER_LENGTH = 4;
+    private static final int USER_CHANCE_NUMBER = 6;
     private ArrayList<Integer> answerList;
 
     public GuessNumber() {
@@ -103,7 +104,7 @@ public class GuessNumber {
                     break;
                 }
             }
-            if(userInputCount == 6){
+            if(userInputCount == USER_CHANCE_NUMBER){
                 System.out.println("Sorry, 6 chances have been used. You failed");
                 break;
             }
