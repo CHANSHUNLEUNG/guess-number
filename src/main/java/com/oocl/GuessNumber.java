@@ -1,30 +1,29 @@
 package com.oocl;
 
 import java.util.*;
-import java.util.stream.IntStream;
 
 public class GuessNumber {
     private static final int ANSWER_LENGTH = 4;
-    private ArrayList<Integer> answer;
+    private ArrayList<Integer> answerList;
 
     public GuessNumber() {
-        answer = new ArrayList<>();
+        answerList = new ArrayList<>();
         generateNewAnswer();
     }
 
-    public ArrayList<Integer> getAnswer() {
-        return answer;
+    public ArrayList<Integer> getAnswerList() {
+        return answerList;
     }
 
-    public void setAnswer(ArrayList<Integer> answer) {
-        this.answer = answer;
+    public void setAnswerList(ArrayList<Integer> answerList) {
+        this.answerList = answerList;
     }
 
     public void generateNewAnswer() {
-        while (answer.size() < ANSWER_LENGTH) {
+        while (answerList.size() < ANSWER_LENGTH) {
             int tempRandomNumber = (int) (Math.random() * 10);
-            if (!answer.contains(tempRandomNumber)) {
-                answer.add(tempRandomNumber);
+            if (!answerList.contains(tempRandomNumber)) {
+                answerList.add(tempRandomNumber);
             }
         }
     }
@@ -64,8 +63,8 @@ public class GuessNumber {
 
     public String correctNumberAndPosition(ArrayList<Integer> userNumbers) {
         int count = 0;
-        for (int number = 0; number < ANSWER_LENGTH; number++) {
-            if(userNumbers.get(number) == getAnswer().get(number)){
+        for (int index = 0; index < ANSWER_LENGTH; index++) {
+            if(userNumbers.get(index) == getAnswerList().get(index)){
                 count++;
             }
         }
@@ -73,13 +72,19 @@ public class GuessNumber {
     }
     public String correctNumberButWrongPosition(ArrayList<Integer> userNumbers) {
         int count = 0;
-
+        for(int index = 0; index < ANSWER_LENGTH; index++){
+            for(int answer : answerList){
+                if(answer == userNumbers.get(index) && answerList.indexOf(answer) != index){
+                    count++;
+                }
+            }
+        }
         return String.valueOf(count);
     }
 
     public static void main(String argv[]) {
         GuessNumber game = new GuessNumber();
-        game.getAnswer().stream().forEach(System.out::println);
+        game.getAnswerList().stream().forEach(System.out::println);
         Scanner userInputScanner = new Scanner(System.in);
 
         while (userInputScanner.hasNext()) {

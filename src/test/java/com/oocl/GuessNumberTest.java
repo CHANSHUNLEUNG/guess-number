@@ -13,7 +13,7 @@ public class GuessNumberTest {
     @Before
     public void setUp() throws Exception {
         game = new GuessNumber();
-        game.setAnswer(new ArrayList<Integer>(Arrays.asList(1,2,3,4)));
+        game.setAnswerList(new ArrayList<Integer>(Arrays.asList(1,2,3,4)));
     }
 
     @Test
