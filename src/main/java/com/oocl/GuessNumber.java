@@ -9,6 +9,8 @@ public class GuessNumber {
     public GuessNumber() {
         answerList = new ArrayList<>();
         generateNewAnswer();
+        //debug
+        setAnswerList(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4)));
     }
 
     public ArrayList<Integer> getAnswerList() {
@@ -63,17 +65,18 @@ public class GuessNumber {
     public String correctNumberAndPosition(ArrayList<Integer> userNumbers) {
         int count = 0;
         for (int index = 0; index < ANSWER_LENGTH; index++) {
-            if(userNumbers.get(index) == getAnswerList().get(index)){
+            if (userNumbers.get(index) == getAnswerList().get(index)) {
                 count++;
             }
         }
         return String.valueOf(count);
     }
+
     public String correctNumberButWrongPosition(ArrayList<Integer> userNumbers) {
         int count = 0;
-        for(int index = 0; index < ANSWER_LENGTH; index++){
-            for(int answer : answerList){
-                if(answer == userNumbers.get(index) && answerList.indexOf(answer) != index){
+        for (int index = 0; index < ANSWER_LENGTH; index++) {
+            for (int answer : answerList) {
+                if (answer == userNumbers.get(index) && answerList.indexOf(answer) != index) {
                     count++;
                 }
             }
@@ -83,12 +86,27 @@ public class GuessNumber {
 
     public static void main(String argv[]) {
         GuessNumber game = new GuessNumber();
-        game.getAnswerList().stream().forEach(System.out::println);
+        game.answerList.forEach(System.out::println);
         Scanner userInputScanner = new Scanner(System.in);
-
+        int userInputCount = 0;
         while (userInputScanner.hasNext()) {
+            userInputCount ++;
             String userInputLine = userInputScanner.nextLine();
-            System.out.println(game.validateUserInput(userInputLine));
+            if(!game.validateUserInput(userInputLine)){
+                System.out.println("Wrong Input, Input Again");
+                continue;
+            }else{
+                ArrayList<Integer> userNumbers = game.parseUserInput(userInputLine);
+                System.out.println(game.feedback(userNumbers));
+                if(game.feedback(userNumbers).equals("4A0B")){
+                    System.out.println("Congratulations! You win!");
+                    break;
+                }
+            }
+            if(userInputCount == 6){
+                System.out.println("Sorry, 6 chances have been used. You failed");
+                break;
+            }
         }
 
     }
