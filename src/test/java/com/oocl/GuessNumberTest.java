@@ -25,6 +25,12 @@ public class GuessNumberTest {
     }
 
     @Test
+    public void should_parse_user_input() {
+        ArrayList<Integer> expectedList = new ArrayList<Integer>(Arrays.asList(2,3,4,5));
+        assertEquals(expectedList,game.parseUserInput("2 3 4 5"));
+    }
+
+    @Test
     public void should_game_feedback() {
 //        assertEquals(game.play());
     }
