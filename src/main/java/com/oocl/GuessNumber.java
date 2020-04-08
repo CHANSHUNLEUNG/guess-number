@@ -73,11 +73,7 @@ public class GuessNumber {
     }
     public String correctNumberButWrongPosition(ArrayList<Integer> userNumbers) {
         int count = 0;
-        for (int number = 0; number < ANSWER_LENGTH; number++) {
-            if(userNumbers.get(number) == getAnswer().get(number)){
-                count++;
-            }
-        }
+
         return String.valueOf(count);
     }
 
