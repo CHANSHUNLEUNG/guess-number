@@ -11,7 +11,7 @@ public class GuessNumber {
         answerList = new ArrayList<>();
         generateNewAnswer();
         //debug
-        setAnswerList(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4)));
+//        setAnswerList(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4)));
     }
 
     public ArrayList<Integer> getAnswerList() {
@@ -91,20 +91,20 @@ public class GuessNumber {
         Scanner userInputScanner = new Scanner(System.in);
         int userInputCount = 0;
         while (userInputScanner.hasNext()) {
-            userInputCount ++;
+            userInputCount++;
             String userInputLine = userInputScanner.nextLine();
-            if(!game.validateUserInput(userInputLine)){
+            if (!game.validateUserInput(userInputLine)) {
                 System.out.println("Wrong Input, Input Again");
                 continue;
-            }else{
+            } else {
                 ArrayList<Integer> userNumbers = game.parseUserInput(userInputLine);
                 System.out.println(game.feedback(userNumbers));
-                if(game.feedback(userNumbers).equals("4A0B")){
+                if (game.feedback(userNumbers).equals("4A0B")) {
                     System.out.println("Congratulations! You win!");
                     break;
                 }
             }
-            if(userInputCount == USER_CHANCE_NUMBER){
+            if (userInputCount == USER_CHANCE_NUMBER) {
                 System.out.println("Sorry, 6 chances have been used. You failed");
                 break;
             }
