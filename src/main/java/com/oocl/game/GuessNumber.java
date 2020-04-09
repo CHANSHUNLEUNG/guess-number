@@ -1,6 +1,7 @@
 package com.oocl.game;
 
 import com.oocl.generator.RandomGenerator;
+import com.oocl.validator.GuessNumberValidator;
 
 import java.util.*;
 
@@ -20,24 +21,6 @@ public class GuessNumber {
 
     public void setAnswerList(ArrayList<Integer> answerList) {
         this.answerList = answerList;
-    }
-
-    public boolean validateUserInput(String userInputLine) {
-        Set<String> userInputSet = new HashSet<>(Arrays.asList(userInputLine.split(" ")));
-        if (userInputLine.split(" ").length != ANSWER_LENGTH || userInputSet.size() != ANSWER_LENGTH) {
-            return false;
-        }
-        for (String userInputString : userInputSet) {
-            try {
-                int userInputInteger = Integer.parseInt(userInputString);
-                if (userInputInteger < 0 || userInputInteger > 9) {
-                    return false;
-                }
-            } catch (Exception e) {
-                return false;
-            }
-        }
-        return true;
     }
 
     public ArrayList<Integer> parseUserInput(String userInputLine) {
@@ -78,7 +61,7 @@ public class GuessNumber {
             userInputCount++;
 
             String userInputLine = userInputScanner.nextLine();
-            if (!game.validateUserInput(userInputLine)) {
+            if (!new GuessNumberValidator().userInputCorrect(userInputLine)) {
                 System.out.println("Wrong Input, Input Again");
                 userInputCount--;
                 continue;

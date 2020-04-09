@@ -2,6 +2,7 @@ package com.oocl.unit;
 
 import com.oocl.game.GuessNumber;
 import com.oocl.generator.RandomGenerator;
+import com.oocl.validator.GuessNumberValidator;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -13,9 +14,11 @@ import static org.junit.Assert.*;
 
 public class GuessNumberTest {
     private GuessNumber game;
+    private GuessNumberValidator guessNumberValidator;
 
     @Before
     public void setUp() throws Exception {
+        guessNumberValidator = new GuessNumberValidator();
         RandomGenerator randomGenerator = Mockito.mock(RandomGenerator.class);
         Mockito.when(randomGenerator.generateNumber()).thenReturn(new ArrayList<Integer>(Arrays.asList(1,2,3,4)));
         game = new GuessNumber(randomGenerator);
@@ -24,10 +27,10 @@ public class GuessNumberTest {
 
     @Test
     public void should_game_user_input_validate() {
-        assertEquals(true, game.validateUserInput("2 3 4 5"));
-        assertEquals(false, game.validateUserInput("a 3 4 5"));
-        assertEquals(false, game.validateUserInput("2 2 4 5"));
-        assertEquals(false, game.validateUserInput("2 2 4 5 6"));
+        assertEquals(true, guessNumberValidator.userInputCorrect("2 3 4 5"));
+        assertEquals(false, guessNumberValidator.userInputCorrect("a 3 4 5"));
+        assertEquals(false, guessNumberValidator.userInputCorrect("2 2 4 5"));
+        assertEquals(false, guessNumberValidator.userInputCorrect("2 2 4 5 6"));
     }
 
     @Test
