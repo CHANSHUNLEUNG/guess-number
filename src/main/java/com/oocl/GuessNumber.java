@@ -10,8 +10,6 @@ public class GuessNumber {
     public GuessNumber() {
         answerList = new ArrayList<>();
         generateNewAnswer();
-        //debug
-//        setAnswerList(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4)));
     }
 
     public ArrayList<Integer> getAnswerList() {
@@ -33,10 +31,7 @@ public class GuessNumber {
 
     public boolean validateUserInput(String userInputLine) {
         Set<String> userInputSet = new HashSet<>(Arrays.asList(userInputLine.split(" ")));
-        if (userInputLine.split(" ").length != 4) {
-            return false;
-        }
-        if (userInputSet.size() != 4) {
+        if (userInputLine.split(" ").length != ANSWER_LENGTH || userInputSet.size() != ANSWER_LENGTH) {
             return false;
         }
         for (String userInputString : userInputSet) {
@@ -87,14 +82,19 @@ public class GuessNumber {
 
     public static void main(String argv[]) {
         GuessNumber game = new GuessNumber();
-        game.answerList.forEach(System.out::println);
+//        game.answerList.forEach(System.out::println);
+
         Scanner userInputScanner = new Scanner(System.in);
         int userInputCount = 0;
+
         while (userInputScanner.hasNext()) {
+
             userInputCount++;
+
             String userInputLine = userInputScanner.nextLine();
             if (!game.validateUserInput(userInputLine)) {
                 System.out.println("Wrong Input, Input Again");
+                userInputCount--;
                 continue;
             } else {
                 ArrayList<Integer> userNumbers = game.parseUserInput(userInputLine);
