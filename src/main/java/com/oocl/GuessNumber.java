@@ -3,13 +3,14 @@ package com.oocl;
 import java.util.*;
 
 public class GuessNumber {
-    private static final int ANSWER_LENGTH = 4;
-    private static final int USER_CHANCE_NUMBER = 6;
+    public static final int ANSWER_LENGTH = 4;
+    public static final int USER_CHANCE_NUMBER = 6;
     private ArrayList<Integer> answerList;
 
     public GuessNumber() {
         answerList = new ArrayList<>();
-        generateNewAnswer();
+        RandomGenerator randomGenerator
+        answerList =generateNewAnswer();
     }
 
     public ArrayList<Integer> getAnswerList() {
