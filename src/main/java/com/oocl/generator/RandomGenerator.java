@@ -1,10 +1,12 @@
-package com.oocl;
+package com.oocl.generator;
+
+import com.oocl.game.GuessNumber;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-public class RandomGenerator implements NumberGenerator{
+public class RandomGenerator implements NumberGenerator {
     @Override
     public ArrayList<Integer> generateNumber() {
         Set randomSet = new HashSet();

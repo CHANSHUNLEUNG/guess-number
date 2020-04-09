@@ -1,7 +1,10 @@
-package com.oocl;
+package com.oocl.unit;
 
+import com.oocl.game.GuessNumber;
+import com.oocl.generator.RandomGenerator;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,7 +16,9 @@ public class GuessNumberTest {
 
     @Before
     public void setUp() throws Exception {
-        game = new GuessNumber();
+        RandomGenerator randomGenerator = Mockito.mock(RandomGenerator.class);
+        Mockito.when(randomGenerator.generateNumber()).thenReturn(new ArrayList<Integer>(Arrays.asList(1,2,3,4)));
+        game = new GuessNumber(randomGenerator);
         game.setAnswerList(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4)));
     }
 
@@ -29,26 +34,6 @@ public class GuessNumberTest {
     public void should_parse_user_input() {
         ArrayList<Integer> expectedList = new ArrayList<Integer>(Arrays.asList(2, 3, 4, 5));
         assertEquals(expectedList, game.parseUserInput("2 3 4 5"));
-    }
-
-    @Test
-    public void should_correct_number_and_position() {
-        assertEquals("1", game.correctNumberAndPosition(game.parseUserInput("1 5 6 7")));
-        assertEquals("0", game.correctNumberAndPosition(game.parseUserInput("2 4 7 8")));
-        assertEquals("1", game.correctNumberAndPosition(game.parseUserInput("0 3 2 4")));
-        assertEquals("0", game.correctNumberAndPosition(game.parseUserInput("5 6 7 8")));
-        assertEquals("0", game.correctNumberAndPosition(game.parseUserInput("4 3 2 1")));
-        assertEquals("4", game.correctNumberAndPosition(game.parseUserInput("1 2 3 4")));
-    }
-
-    @Test
-    public void should_correct_number_but_wrong_position() {
-        assertEquals("0", game.correctNumberButWrongPosition(game.parseUserInput("1 5 6 7")));
-        assertEquals("2", game.correctNumberButWrongPosition(game.parseUserInput("2 4 7 8")));
-        assertEquals("2", game.correctNumberButWrongPosition(game.parseUserInput("0 3 2 4")));
-        assertEquals("0", game.correctNumberButWrongPosition(game.parseUserInput("5 6 7 8")));
-        assertEquals("4", game.correctNumberButWrongPosition(game.parseUserInput("4 3 2 1")));
-        assertEquals("0", game.correctNumberButWrongPosition(game.parseUserInput("1 2 3 4")));
     }
 
     @Test

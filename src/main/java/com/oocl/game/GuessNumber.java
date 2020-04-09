@@ -1,4 +1,6 @@
-package com.oocl;
+package com.oocl.game;
+
+import com.oocl.generator.RandomGenerator;
 
 import java.util.*;
 
@@ -7,10 +9,9 @@ public class GuessNumber {
     public static final int USER_CHANCE_NUMBER = 6;
     private ArrayList<Integer> answerList;
 
-    public GuessNumber() {
+    public GuessNumber(RandomGenerator randomGenerator) {
         answerList = new ArrayList<>();
-        RandomGenerator randomGenerator
-        answerList =generateNewAnswer();
+        answerList = randomGenerator.generateNumber();
     }
 
     public ArrayList<Integer> getAnswerList() {
@@ -19,15 +20,6 @@ public class GuessNumber {
 
     public void setAnswerList(ArrayList<Integer> answerList) {
         this.answerList = answerList;
-    }
-
-    public void generateNewAnswer() {
-        while (answerList.size() < ANSWER_LENGTH) {
-            int tempRandomNumber = (int) (Math.random() * 10);
-            if (!answerList.contains(tempRandomNumber)) {
-                answerList.add(tempRandomNumber);
-            }
-        }
     }
 
     public boolean validateUserInput(String userInputLine) {
@@ -49,40 +41,33 @@ public class GuessNumber {
     }
 
     public ArrayList<Integer> parseUserInput(String userInputLine) {
-        ArrayList<Integer> resultList = new ArrayList<>();
+        ArrayList<Integer> resultList = new ArrayList<Integer>();
         new ArrayList<String>(Arrays.asList(userInputLine.split(" ")))
                 .stream().forEach(element -> resultList.add(Integer.parseInt(element)));
         return resultList;
     }
 
     public String feedback(ArrayList<Integer> userNumbers) {
-        return correctNumberAndPosition(userNumbers) + "A" + correctNumberButWrongPosition(userNumbers) + "B";
-    }
+        int correctNumberAndPositionCount = 0;
+        int correctOnlyNumberCount = 0;
+        for (int index = 0; index < userNumbers.size(); index++) {
+            boolean isNumberAndPosition = getAnswerList().contains(userNumbers.get(index)) &&
+                    getAnswerList().indexOf(userNumbers.get(index)) == index;
+            boolean isOnlyNumber = getAnswerList().contains(userNumbers.get(index)) &&
+                    getAnswerList().indexOf(userNumbers.get(index)) != index;
+            if (isNumberAndPosition) {
+                correctNumberAndPositionCount++;
+            }
+            if (isOnlyNumber) {
+                correctOnlyNumberCount++;
 
-    public String correctNumberAndPosition(ArrayList<Integer> userNumbers) {
-        int count = 0;
-        for (int index = 0; index < ANSWER_LENGTH; index++) {
-            if (userNumbers.get(index) == getAnswerList().get(index)) {
-                count++;
             }
         }
-        return String.valueOf(count);
-    }
-
-    public String correctNumberButWrongPosition(ArrayList<Integer> userNumbers) {
-        int count = 0;
-        for (int index = 0; index < ANSWER_LENGTH; index++) {
-            for (int answer : answerList) {
-                if (answer == userNumbers.get(index) && answerList.indexOf(answer) != index) {
-                    count++;
-                }
-            }
-        }
-        return String.valueOf(count);
+        return correctNumberAndPositionCount + "A" + correctOnlyNumberCount + "B";
     }
 
     public static void main(String argv[]) {
-        GuessNumber game = new GuessNumber();
+        GuessNumber game = new GuessNumber(new RandomGenerator());
 //        game.answerList.forEach(System.out::println);
 
         Scanner userInputScanner = new Scanner(System.in);
