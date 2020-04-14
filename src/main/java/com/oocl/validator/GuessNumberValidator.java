@@ -21,14 +21,9 @@ public class GuessNumberValidator implements UserInputValidator {
                 if (userInputInteger < 0 || userInputInteger > 9) {
                     throw new UserInputIncorrectException("user input should between 0-9");
                 }
-            } catch (UserInputIncorrectException userInputIncorrectException) {
+            } catch (UserInputIncorrectException | NumberFormatException userInputIncorrectException) {
                 System.out.println(userInputIncorrectException.getMessage());
                 return false;
-            } catch (NumberFormatException numberFormatException) {
-                System.out.println(numberFormatException.getMessage());
-                return false;
-            } catch (Exception e) {
-                throw e;
             }
         }
         return true;

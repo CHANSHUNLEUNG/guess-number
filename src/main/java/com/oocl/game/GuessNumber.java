@@ -3,11 +3,13 @@ package com.oocl.game;
 import com.oocl.generator.RandomGenerator;
 import com.oocl.validator.GuessNumberValidator;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Scanner;
 
 public class GuessNumber {
     public static final int ANSWER_LENGTH = 4;
-    public static final int USER_CHANCE_NUMBER = 6;
+    private static final int USER_CHANCE_NUMBER = 6;
     private ArrayList<Integer> answerList;
 
     public GuessNumber(RandomGenerator randomGenerator) {
@@ -15,7 +17,7 @@ public class GuessNumber {
         answerList = randomGenerator.generateNumber();
     }
 
-    public ArrayList<Integer> getAnswerList() {
+    private ArrayList<Integer> getAnswerList() {
         return answerList;
     }
 
@@ -24,9 +26,9 @@ public class GuessNumber {
     }
 
     public ArrayList<Integer> parseUserInput(String userInputLine) {
-        ArrayList<Integer> resultList = new ArrayList<Integer>();
-        new ArrayList<String>(Arrays.asList(userInputLine.split(" ")))
-                .stream().forEach(element -> resultList.add(Integer.parseInt(element)));
+        ArrayList<Integer> resultList = new ArrayList<>();
+        new ArrayList<>(Arrays.asList(userInputLine.split(" ")))
+                .forEach(element -> resultList.add(Integer.parseInt(element)));
         return resultList;
     }
 
@@ -49,9 +51,8 @@ public class GuessNumber {
         return correctNumberAndPositionCount + "A" + correctOnlyNumberCount + "B";
     }
 
-    public static void main(String argv[]) {
+    public static void main(String[] argv) {
         GuessNumber game = new GuessNumber(new RandomGenerator());
-//        game.answerList.forEach(System.out::println);
 
         Scanner userInputScanner = new Scanner(System.in);
         int userInputCount = 0;

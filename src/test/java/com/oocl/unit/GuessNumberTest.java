@@ -17,25 +17,25 @@ public class GuessNumberTest {
     private GuessNumberValidator guessNumberValidator;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         guessNumberValidator = new GuessNumberValidator();
         RandomGenerator randomGenerator = Mockito.mock(RandomGenerator.class);
-        Mockito.when(randomGenerator.generateNumber()).thenReturn(new ArrayList<Integer>(Arrays.asList(1,2,3,4)));
+        Mockito.when(randomGenerator.generateNumber()).thenReturn(new ArrayList<>(Arrays.asList(1, 2, 3, 4)));
         game = new GuessNumber(randomGenerator);
-        game.setAnswerList(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4)));
+        game.setAnswerList(new ArrayList<>(Arrays.asList(1, 2, 3, 4)));
     }
 
     @Test
     public void should_game_user_input_validate() {
-        assertEquals(true, guessNumberValidator.userInputCorrect("2 3 4 5"));
-        assertEquals(false, guessNumberValidator.userInputCorrect("a 3 4 5"));
-        assertEquals(false, guessNumberValidator.userInputCorrect("2 2 4 5"));
-        assertEquals(false, guessNumberValidator.userInputCorrect("2 2 4 5 6"));
+        assertTrue(guessNumberValidator.userInputCorrect("2 3 4 5"));
+        assertFalse(guessNumberValidator.userInputCorrect("a 3 4 5"));
+        assertFalse(guessNumberValidator.userInputCorrect("2 2 4 5"));
+        assertFalse(guessNumberValidator.userInputCorrect("2 2 4 5 6"));
     }
 
     @Test
     public void should_parse_user_input() {
-        ArrayList<Integer> expectedList = new ArrayList<Integer>(Arrays.asList(2, 3, 4, 5));
+        ArrayList<Integer> expectedList = new ArrayList<>(Arrays.asList(2, 3, 4, 5));
         assertEquals(expectedList, game.parseUserInput("2 3 4 5"));
     }
 
