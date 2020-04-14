@@ -40,12 +40,32 @@ public class GuessNumberTest {
     }
 
     @Test
-    public void should_game_feedback() {
-        assertEquals("1A0B", game.feedback(game.parseUserInput("1 5 6 7")));
-        assertEquals("0A2B", game.feedback(game.parseUserInput("2 4 7 8")));
-        assertEquals("1A2B", game.feedback(game.parseUserInput("0 3 2 4")));
-        assertEquals("0A0B", game.feedback(game.parseUserInput("5 6 7 8")));
-        assertEquals("0A4B", game.feedback(game.parseUserInput("4 3 2 1")));
+    public void should_all_number_correct_and_all_position_correct() {
         assertEquals("4A0B", game.feedback(game.parseUserInput("1 2 3 4")));
+    }
+
+    @Test
+    public void should_all_number_correct_and_partial_position_correct() {
+        assertEquals("2A2B", game.feedback(game.parseUserInput("1 2 4 3")));
+    }
+
+    @Test
+    public void should_partial_number_correct_and_partial_position_correct() {
+        assertEquals("1A1B", game.feedback(game.parseUserInput("1 3 5 6")));
+    }
+
+    @Test
+    public void should_all_number_correct_and_all_position_wrong() {
+        assertEquals("0A4B", game.feedback(game.parseUserInput("4 3 2 1")));
+    }
+
+    @Test
+    public void should_partial_number_correct_and_all_position_wrong() {
+        assertEquals("0A2B", game.feedback(game.parseUserInput("4 3 5 6")));
+    }
+
+    @Test
+    public void should_all_number_wrong_and_all_position_wrong() {
+        assertEquals("0A0B", game.feedback(game.parseUserInput("5 6 7 8")));
     }
 }
