@@ -26,7 +26,7 @@ public class GuessNumberTest {
     }
 
     @Test
-    public void should_game_user_input_validate() {
+    public void should_validate_user_input() {
         assertTrue(guessNumberValidator.userInputCorrect("2 3 4 5"));
         assertFalse(guessNumberValidator.userInputCorrect("a 3 4 5"));
         assertFalse(guessNumberValidator.userInputCorrect("2 2 4 5"));
