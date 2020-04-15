@@ -1,7 +1,7 @@
 package com.oocl.validator;
 
 import com.oocl.exception.UserInputIncorrectException;
-import com.oocl.game.GuessNumber;
+import com.oocl.generator.RandomGenerator;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -16,8 +16,8 @@ public class GuessNumberValidator implements UserInputValidator {
     @Override
     public boolean userInputCorrect(String userInputLine) {
         Set<String> userInputSet = new HashSet<>(Arrays.asList(userInputLine.split(USER_INPUT_DELIMITER)));
-        if (userInputLine.split(" ").length != GuessNumber.ANSWER_LENGTH ||
-                userInputSet.size() != GuessNumber.ANSWER_LENGTH) {
+        if (userInputLine.split(" ").length != RandomGenerator.ANSWER_LENGTH ||
+                userInputSet.size() != RandomGenerator.ANSWER_LENGTH) {
             return false;
         }
         for (String userInputString : userInputSet) {

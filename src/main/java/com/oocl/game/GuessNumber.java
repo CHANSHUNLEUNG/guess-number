@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class GuessNumber {
-    public static final int ANSWER_LENGTH = 4;
     private static final int USER_CHANCE_NUMBER = 6;
     private ArrayList<Integer> answerList;
 
