@@ -41,7 +41,9 @@ public class GuessNumberTest {
 
     @Test
     public void should_all_number_correct_and_all_position_correct() {
-        assertEquals("4A0B", game.feedback(game.parseUserInput("1 2 3 4")));
+        ArrayList<Integer> userNumbers = game.parseUserInput("1 2 3 4");
+        String feedback = game.feedback(userNumbers);
+        assertEquals("4A0B", feedback);
     }
 
     @Test

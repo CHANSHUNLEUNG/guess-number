@@ -8,9 +8,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class GuessNumberValidator implements UserInputValidator {
+
+    public static final String USER_INPUT_DELIMITER = " ";
+    public static final int USER_INPUT_START = 0;
+    public static final int USER_INPUT_END = 9;
+
     @Override
     public boolean userInputCorrect(String userInputLine) {
-        Set<String> userInputSet = new HashSet<>(Arrays.asList(userInputLine.split(" ")));
+        Set<String> userInputSet = new HashSet<>(Arrays.asList(userInputLine.split(USER_INPUT_DELIMITER)));
         if (userInputLine.split(" ").length != GuessNumber.ANSWER_LENGTH ||
                 userInputSet.size() != GuessNumber.ANSWER_LENGTH) {
             return false;
@@ -18,8 +23,8 @@ public class GuessNumberValidator implements UserInputValidator {
         for (String userInputString : userInputSet) {
             try {
                 int userInputInteger = Integer.parseInt(userInputString);
-                if (userInputInteger < 0 || userInputInteger > 9) {
-                    throw new UserInputIncorrectException("user input should between 0-9");
+                if (userInputInteger < USER_INPUT_START || userInputInteger > USER_INPUT_END) {
+                    throw new UserInputIncorrectException(UserInputIncorrectException.USER_INPUT_ERROR);
                 }
             } catch (UserInputIncorrectException | NumberFormatException userInputIncorrectException) {
                 System.out.println(userInputIncorrectException.getMessage());
