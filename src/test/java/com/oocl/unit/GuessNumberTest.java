@@ -29,14 +29,17 @@ public class GuessNumberTest {
     public void should_pass_validator_when_user_input_completely_correct() {
         assertTrue(guessNumberValidator.userInputCorrect("2 3 4 5"));
     }
+
     @Test
     public void should_fail_validator_when_user_input_contain_character() {
         assertFalse(guessNumberValidator.userInputCorrect("a 3 4 5"));
     }
+
     @Test
     public void should_fail_validator_when_user_input_have_duplicate_number_with_length_4() {
         assertFalse(guessNumberValidator.userInputCorrect("2 2 4 5"));
     }
+
     @Test
     public void should_fail_validator_when_user_input_have_duplicate_number_with_length_5() {
         assertFalse(guessNumberValidator.userInputCorrect("2 2 4 5 6"));
