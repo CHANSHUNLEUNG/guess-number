@@ -14,7 +14,7 @@ public class GuessNumberValidator implements UserInputValidator {
     public static final int USER_INPUT_END = 9;
 
     @Override
-    public boolean userInputCorrect(String userInputLine) {
+    public boolean isUserInputCorrect(String userInputLine) {
         Set<String> userInputSet = new HashSet<>(Arrays.asList(userInputLine.split(USER_INPUT_DELIMITER)));
         if (userInputLine.split(" ").length != RandomGenerator.ANSWER_LENGTH ||
                 userInputSet.size() != RandomGenerator.ANSWER_LENGTH) {

@@ -1,5 +1,5 @@
 package com.oocl.validator;
 
 public interface UserInputValidator {
-    boolean userInputCorrect(String userInputLine);
+    boolean isUserInputCorrect(String userInputLine);
 }

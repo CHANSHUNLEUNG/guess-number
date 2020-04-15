@@ -61,7 +61,7 @@ public class GuessNumber {
             userInputCount++;
 
             String userInputLine = userInputScanner.nextLine();
-            if (!new GuessNumberValidator().userInputCorrect(userInputLine)) {
+            if (!new GuessNumberValidator().isUserInputCorrect(userInputLine)) {
                 System.out.println("Wrong Input, Input Again");
                 userInputCount--;
                 continue;
