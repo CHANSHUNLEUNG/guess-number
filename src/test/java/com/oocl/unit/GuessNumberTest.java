@@ -44,39 +44,69 @@ public class GuessNumberTest {
 
     @Test
     public void should_parse_user_input() {
+        //Given
         ArrayList<Integer> expectedList = new ArrayList<>(Arrays.asList(2, 3, 4, 5));
+
         assertEquals(expectedList, game.parseUserInput("2 3 4 5"));
     }
 
     @Test
     public void should_all_number_correct_and_all_position_correct() {
+        //Given
         ArrayList<Integer> userNumbers = game.parseUserInput("1 2 3 4");
+        //When
         String feedback = game.feedback(userNumbers);
+
         assertEquals("4A0B", feedback);
     }
 
     @Test
     public void should_all_number_correct_and_partial_position_correct() {
-        assertEquals("2A2B", game.feedback(game.parseUserInput("1 2 4 3")));
+        //Given
+        ArrayList<Integer> userNumbers = game.parseUserInput("1 2 4 3");
+        //When
+        String feedback = game.feedback(userNumbers);
+
+        assertEquals("2A2B", feedback);
     }
 
     @Test
     public void should_partial_number_correct_and_partial_position_correct() {
-        assertEquals("1A1B", game.feedback(game.parseUserInput("1 3 5 6")));
+        //Given
+        ArrayList<Integer> userNumbers = game.parseUserInput("1 3 5 6");
+        //When
+        String feedback = game.feedback(userNumbers);
+
+        assertEquals("1A1B", feedback);
     }
 
     @Test
     public void should_all_number_correct_and_all_position_wrong() {
-        assertEquals("0A4B", game.feedback(game.parseUserInput("4 3 2 1")));
+        //Given
+        ArrayList<Integer> userNumbers = game.parseUserInput("4 3 2 1");
+        //When
+        String feedback = game.feedback(userNumbers);
+
+        assertEquals("0A4B", feedback);
     }
 
     @Test
     public void should_partial_number_correct_and_all_position_wrong() {
-        assertEquals("0A2B", game.feedback(game.parseUserInput("4 3 5 6")));
+        //Given
+        ArrayList<Integer> userNumbers = game.parseUserInput("4 3 5 6");
+        //When
+        String feedback = game.feedback(userNumbers);
+
+        assertEquals("0A2B", feedback);
     }
 
     @Test
     public void should_all_number_wrong_and_all_position_wrong() {
-        assertEquals("0A0B", game.feedback(game.parseUserInput("5 6 7 8")));
+        //Given
+        ArrayList<Integer> userNumbers = game.parseUserInput("5 6 7 8");
+        //When
+        String feedback = game.feedback(userNumbers);
+
+        assertEquals("0A0B", feedback);
     }
 }
